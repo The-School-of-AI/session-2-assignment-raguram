@@ -2,6 +2,8 @@
 import gc
 from typing import List
 import time
+import sys
+
 
 # Here in this code we will be leaking memory because we are creating cyclic reference.
 # Find that we are indeed making cyclic references.
@@ -35,9 +37,11 @@ def add_something(collection: List[Something], i: int):
     something.something_new = SomethingNew(i, something)
     collection.append(something)
 
+
 def reserved_function():
     # to be used in future if required
     pass
+
 
 def clear_memory(collection: List[Something]):
     # you probably need to add some comment here
@@ -45,6 +49,7 @@ def clear_memory(collection: List[Something]):
 
     # Explicitly invoke gc to ensure the garbage collection happens immediately.
     gc.collect()
+
 
 def critical_function():
     collection = list()
@@ -69,18 +74,14 @@ def compare_strings_old(n):
         if 'd' in char_list:
             pass
 
+
 # YOU NEED TO CHANGE THIS PROGRAM
 def compare_strings_new(n):
-    import sys
     a = sys.intern('a long string that is not intered' * 200)
     b = sys.intern('a long string that is not intered' * 200)
 
     # Adding the loop to compare the performance between the similar implementation in compare_strings_old code.
+    print(a is b and 'd' in a)
     for i in range(n):
-        if a is b:
+        if a is b and 'd' in a:
             pass
-
-    for i in range(n):
-        if 'd' in a:
-            pass
-
