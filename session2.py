@@ -1,4 +1,5 @@
 # KINDLY GO THROUGH TEST FILE TO UNDERSTAND
+import gc
 from typing import List
 import time
 
@@ -14,6 +15,9 @@ class Something(object):
         super().__init__()
         self.something_new = None
 
+    def __repr__(self):
+        return repr('Something')
+
 
 class SomethingNew(object):
 
@@ -22,13 +26,16 @@ class SomethingNew(object):
         self.i = i
         self.something = something
 
+    def __repr__(self):
+        return repr('SomethingNew')
+
 
 def add_something(collection: List[Something], i: int):
     something = Something()
     something.something_new = SomethingNew(i, something)
     collection.append(something)
 
-def reserved_Function():
+def reserved_function():
     # to be used in future if required
     pass
 
@@ -36,6 +43,8 @@ def clear_memory(collection: List[Something]):
     # you probably need to add some comment here
     collection.clear()
 
+    # Explicitly invoke gc to ensure the garbage collection happens immediately.
+    gc.collect()
 
 def critical_function():
     collection = list()
@@ -62,4 +71,16 @@ def compare_strings_old(n):
 
 # YOU NEED TO CHANGE THIS PROGRAM
 def compare_strings_new(n):
-    time.sleep(6) # remove this line, this is just to simulate your "slow" code
+    import sys
+    a = sys.intern('a long string that is not intered' * 200)
+    b = sys.intern('a long string that is not intered' * 200)
+
+    # Adding the loop to compare the performance between the similar implementation in compare_strings_old code.
+    for i in range(n):
+        if a is b:
+            pass
+
+    for i in range(n):
+        if 'd' in a:
+            pass
+

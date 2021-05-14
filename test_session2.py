@@ -50,12 +50,14 @@ def test_performance():
     session2.compare_strings_old(10000000)
     end1 = time.perf_counter()
     delta1 = end1 - start1
+    print(f"Old code performance: {delta1}")
 
     start2 = time.perf_counter()
     session2.compare_strings_new(10000000)
     end2 = time.perf_counter()
     delta2 = end2 - start2
 
+    print(f"New code performance: {delta2}")
     assert delta1 / delta2 >= 10.0
 
 
@@ -67,6 +69,7 @@ def test_readme_contents():
     readme = open("README.md", "r")
     readme_words = readme.read().split()
     readme.close()
+    print(len(readme_words))
     assert len(readme_words) >= 500, "Make your README.md file interesting! Add atleast 500 words"
 
 
