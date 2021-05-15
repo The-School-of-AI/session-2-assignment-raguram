@@ -108,9 +108,6 @@ The assignment contains some test cases that fails. We will have to fix the code
     * `compare_strings_new` new optimized implementation of comparing strings and checking if a character is present in
       a string. In this function, we have replaced the `sleep` implementation with the actual code for comparison.
 
-
-* Something & 
-
   
 
 
